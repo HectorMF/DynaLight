@@ -114,7 +114,7 @@ public class DynaLight implements ApplicationListener {
 		batch.begin();
 		for(Room room : rooms)
 			room.drawText(batch, font);
-		//batch.draw(region, 0, 0, 0, 0, 100, 100, 1, 1, 0);
+		batch.draw(region, -350, 330, 0, 0, 100, 100, 1, 1, 0);
 		//sprite.draw(batch);
 		batch.end();
 	}
