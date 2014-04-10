@@ -77,6 +77,7 @@ public class DynaLight implements ApplicationListener {
 		
 		
 		hallway.addLight(new NonSensorCeilingLight().setPosition(3, 13));
+		hallway.addDoor(bedroomDoor);
 		
 		
 		bedroom2.addLight(new StandingLamp().setPosition(1, 15).setRadius(7));

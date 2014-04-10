@@ -11,14 +11,8 @@ public class BasicAlgorithm implements ISensorAlgorithm{
 	
 	@Override
 	public float execute(int lux, int target, float voltage) {
-		//int diff = target - lux;
-		int diff = 0;
-		if(target > lux)
-			diff = 1;
-		if(target < lux)
-			diff = -1;
-		
-		
+		int diff = target - lux;
+
 		float temp = voltage + (diff * voltageDelta);
 		if(temp > 120) return 120;
 		if(temp < 0) return 0;
