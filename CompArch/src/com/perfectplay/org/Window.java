@@ -9,7 +9,7 @@ public class Window {
 	}
 	
 	int calculateLumens(){
-		return Sun.instance.ambientLumens;
+		return Sun.instance.getLumens();
 	}
 	
 }

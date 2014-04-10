@@ -37,6 +37,7 @@ public class DynaLight implements ApplicationListener {
 	private Stage stage;
 	
 	private double time;
+	public static boolean isRunning;
 	
 	@Override
 	public void create() {		
@@ -55,10 +56,14 @@ public class DynaLight implements ApplicationListener {
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		region = new TextureRegion(texture, 0, 0, 300, 300);
-		int moveX = -5;
-		int moveY = -12;
+		int moveX = -2;
+		int moveY = -13;
 		
 		time = 0;
+		
+		this.stage = new Stage(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, this.batch);
+		this.skin = new Skin(Gdx.files.internal("data/buttons.json"));
+		Gdx.input.setInputProcessor(this.stage);
 		
 		Room hallway = new Room(6,26).setPosition(moveX + 10, moveY + 0);
 		Room bedroom1 = new Room(10,10).setPosition(moveX, moveY);
@@ -169,7 +174,7 @@ public class DynaLight implements ApplicationListener {
 		rooms.add(bedroom4);
 		rooms.add(bedroom5);
 		rooms.add(bathroom1);
-
+		StageComposer.compose(stage, skin);
 	}
 
 	@Override
@@ -180,13 +185,18 @@ public class DynaLight implements ApplicationListener {
 
 	@Override
 	public void render() {		
-		time += .0002;
+		
 
-		Sun.instance.ambientLumens = (int) (Math.abs(7995 * Math.sin(time)));
-		Sun.instance.directLumens = (int) (5 + Math.abs(5 + 99995 * Math.sin(time)));
+		if(isRunning){
+			time += .0006;
+			Sun.instance.setLumens((int) (Math.abs(7995 * Math.sin(time))));
+			SensorController.instance.update();
+		}
+		
+	//	Sun.instance.directLumens = (int) (5 + Math.abs(5 + 99995 * Math.sin(time))));
 
 		
-		SensorController.instance.update();
+		
 	//	Gdx.gl.glClearColor(.52f, .807f, .95f, 1);
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL10.GL_COLOR_BUFFER_BIT);
@@ -200,19 +210,22 @@ public class DynaLight implements ApplicationListener {
 			room.draw(shapeRenderer);
 			room.calculateLux();
 		}
+		stage.draw();
 		shapeRenderer.end();
 		
 		batch.setProjectionMatrix(camera.combined);
 		batch.begin();
 		for(Room room : rooms)
 			room.drawText(batch, font);
-		batch.draw(region, -350, 330, 0, 0, 100, 100, 1, 1, 0);
+		///batch.draw(region, -350, 330, 0, 0, 100, 100, 1, 1, 0);
 		//sprite.draw(batch);
 		batch.end();
+		
 	}
 
 	@Override
 	public void resize(int width, int height) {
+		stage.setViewport(width, height, false);
 		camera.viewportHeight = height;
 		camera.viewportWidth = width;
 		camera.update(true);
