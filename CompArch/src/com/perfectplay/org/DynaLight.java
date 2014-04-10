@@ -52,13 +52,13 @@ public class DynaLight implements ApplicationListener {
 		int moveX = -5;
 		int moveY = -12;
 		
-		Room hallway = new Room(5,25).setPosition(moveX + 10, moveY + 0);
+		Room hallway = new Room(6,26).setPosition(moveX + 10, moveY + 0);
 		Room bedroom1 = new Room(10,10).setPosition(moveX, moveY);
-		Room bedroom2 = new Room (10,15).setPosition(moveX +0,  moveY +10);
-		Room bedroom3 = new Room (15,8).setPosition(moveX +0,  -8 + moveY);
-		Room bedroom4 = new Room (10,12).setPosition(moveX +15,  -8 + moveY );
-		Room bedroom5 = new Room (20,8).setPosition(moveX +0,  moveY +25);
-		Room bathroom1 = new Room(10,5).setPosition(moveX +15,  moveY +4);
+		Room bedroom2 = new Room (10,16).setPosition(moveX +0,  moveY +10);
+		Room bedroom3 = new Room (16,8).setPosition(moveX +0,  -8 + moveY);
+		Room bedroom4 = new Room (10,12).setPosition(moveX +16,  -8 + moveY );
+		Room bedroom5 = new Room (20,8).setPosition(moveX +0,  moveY +26);
+		Room bathroom1 = new Room(10,6).setPosition(moveX +16,  moveY +4);
 		Door bedroomDoor = new Door();
 		
 		bedroom1.addDoor(bedroomDoor);
@@ -66,11 +66,13 @@ public class DynaLight implements ApplicationListener {
 		bedroom1.setSensor(new Sensor(new BasicAlgorithm(.1f)).setTargetLux(200));
 		
 		//add the lights
-		bedroom1.addLight(new DeskLamp().setPosition(50,50).setRadius(5));
-		bedroom1.addLight(new DeskLamp());
-		bedroom1.addLight(new CeilingLight());
+		bedroom1.addLight(new DeskLamp().setPosition(9,1).setRadius(5));
+		bedroom1.addLight(new DeskLamp().setPosition(9, 9).setRadius(6));
+		bedroom1.addLight(new CeilingLight().setPosition(5,5));
 		
 		bedroom1.addWindow(new Window());
+		
+		hallway.addLight(new CeilingLight().setPosition(3, 13));
 
 		rooms.add(hallway);
 		rooms.add(bedroom1);

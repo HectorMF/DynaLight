@@ -20,7 +20,7 @@ public abstract class LightFixture {
 	}
 	
 	public LightFixture setPosition(int x, int y){
-		this.position.set(x,y);
+		this.position.set(x*20,y*20);
 		return this;
 	}
 	
