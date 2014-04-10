@@ -57,7 +57,7 @@ public class DynaLight implements ApplicationListener {
 		Room bedroom3 = new Room (15,8).setPosition(0, -8);
 		Room bedroom4 = new Room (10,12).setPosition(15, -8);
 		Room bedroom5 = new Room (20,8).setPosition(0, 25);
-
+		Room bathroom1 = new Room(10,5).setPosition(15, 4);
 		Door bedroomDoor = new Door();
 		
 		bedroom1.addDoor(bedroomDoor);
@@ -77,7 +77,7 @@ public class DynaLight implements ApplicationListener {
 		rooms.add(bedroom3);
 		rooms.add(bedroom4);
 		rooms.add(bedroom5);
-		
+		rooms.add(bathroom1);
 
 	}
 
