@@ -4,8 +4,8 @@ public class Sensor {
 	private ISensorAlgorithm lightAlgorithm;
 	private Room room;
 	
-	private int voltage = 2;	
-	private int target = 500;
+	private float voltage = 120;	
+	private int target = 00;
 	
 	public Sensor(ISensorAlgorithm lightAlgorithm){
 		this.lightAlgorithm = lightAlgorithm;
@@ -17,11 +17,14 @@ public class Sensor {
 	
 	public void clockTick(){
 		int lux = room.calculateLux();
+		if(lux == target) return;
+		
 		voltage = lightAlgorithm.execute(lux, target, voltage);
-		room.setVoltage(voltage);
+		room.dim(voltage/120f);
 	}
 	
-	public void setTargetLux(int lux){
+	public Sensor setTargetLux(int lux){
 		this.target = lux;
+		return this;
 	}
 }

@@ -6,7 +6,8 @@ public class Door {
 	
 	private Room room1;
 	private Room room2;
-		
+	private boolean isClosed;
+	
 	public Door(){}
 		
 	void addRoom(Room room){
@@ -17,13 +18,25 @@ public class Door {
 	}
 		
 	int getLux(Room room){
+		if(isClosed) return 0;
+		
 		if(room == room1){
-			return (int) (room2.calculateLux() * transfer);
+			if(room2 == null) return 0;
+			return (int) (room2.getLux() * transfer);
 		}
 		if(room == room2){
-			return (int) (room1.calculateLux() * transfer);
+			if(room1 == null) return 0;
+			return (int) (room1.getLux() * transfer);
 		}
 		return 0;
+	}
+	
+	void close(){
+		isClosed = true;
+	}
+	
+	void open(){
+		isClosed = false;
 	}
 		
 }

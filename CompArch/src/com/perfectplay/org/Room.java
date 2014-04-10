@@ -2,11 +2,16 @@ package com.perfectplay.org;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
 public class Room {
+	public final Vector2 position;
+	public final Vector2 dimensions;
 	
-	private Vector2 dimensions;
 	private ArrayList<Window> windows;
 	private ArrayList<LightFixture> lights;
 	private ArrayList<Door> doors;
@@ -14,21 +19,23 @@ public class Room {
 	
 	private int lux;
 	
-	public Room(Vector2 dimensions){
+	public Room(int width, int length){
+		this.position = new Vector2();
+		this.dimensions = new Vector2(width,length);
 		this.windows = new ArrayList<Window>();
 		this.lights = new ArrayList<LightFixture>();
 		this.doors = new ArrayList<Door>();
-		lux = 0;
+		this.lux = 0;
 	}
 	
 	int calculateLux(){
 		lux = 0;
 		for(Window window : windows){
-			lux +=  (int)(window.getLumens()/(float)(dimensions.x * dimensions.y));
+			lux +=  (int)(10.76391 * window.getLumens()/(float)(dimensions.x * dimensions.y));
 		}
 		
 		for(LightFixture light : lights){
-			lux += (int)(light.getLumens()/(float)(dimensions.x * dimensions.y));
+			lux += (int)(10.76391 * light.getLumens()/(float)(dimensions.x * dimensions.y));
 		}
 		
 		for(Door door : doors){
@@ -42,9 +49,16 @@ public class Room {
 		return lux;
 	}
 	
-	public void setSensor(Sensor sensor){
+	public Room setPosition(int x, int y){
+		this.position.set(x*20,y*20);
+		return this;
+	}
+	
+	public Room setSensor(Sensor sensor){
 		this.sensor = sensor;
 		this.sensor.setRoom(this);
+		SensorController.instance.addSensor(sensor);
+		return this;
 	}
 	
 	public void addWindow(Window window){
@@ -60,9 +74,32 @@ public class Room {
 		door.addRoom(this);
 	}
 	
-	void setVoltage(int voltage){
+	void dim(float percentage){
 		for(LightFixture light : lights){
-			light.setVoltage(voltage);
+			light.dim(percentage);
 		}
+	}
+	
+	public void draw(ShapeRenderer renderer){
+		renderer.rect(position.x, position.y, dimensions.x*20, dimensions.y*20, 0, 0, 0, Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK);
+		renderer.rect(position.x+1, position.y+1, dimensions.x*20 - 2, dimensions.y*20 - 2, 0, 0, 0, Color.BLACK, Color.BLACK, Color.BLACK, Color.BLACK);
+
+		for(Window window : windows){
+			
+		}
+		
+		for(LightFixture light : lights){
+			renderer.setColor(Color.ORANGE);
+			light.draw(position, renderer);
+		}
+		
+		for(Door door : doors){
+			
+		}
+		
+	}
+	
+	public void drawText(SpriteBatch batch, BitmapFont font){
+		font.draw(batch, "Lux: " + lux, position.x + 5, position.y + 20);
 	}
 }

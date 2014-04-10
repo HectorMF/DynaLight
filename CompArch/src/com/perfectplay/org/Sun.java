@@ -7,9 +7,9 @@ public class Sun {
 	
 	public Vector2 position;
 	
-	public int ambientLumens;
+	public int ambientLumens = 0000;
 	public int directLumens;
 	
 	private Sun(){}
-
+	
 }

@@ -3,17 +3,20 @@ package com.perfectplay.org.algorithms;
 import com.perfectplay.org.ISensorAlgorithm;
 
 public class BasicAlgorithm implements ISensorAlgorithm{
-	private int voltageDelta;
+	private float voltageDelta;
 	
-	public BasicAlgorithm(int voltageDelta){
+	public BasicAlgorithm(float voltageDelta){
 		this.voltageDelta = voltageDelta;
 	}
 	
 	@Override
-	public int execute(int lux, int target, int voltage) {
+	public float execute(int lux, int target, float voltage) {
 		int diff = target - lux;
 		
-		return voltage + (diff * voltageDelta);
+		float temp = voltage + (diff * voltageDelta);
+		if(temp > 120) return 120;
+		if(temp < 0) return 0;
+		return temp;
 
 	}
 }

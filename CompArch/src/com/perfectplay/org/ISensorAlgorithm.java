@@ -2,6 +2,6 @@ package com.perfectplay.org;
 
 public interface ISensorAlgorithm {
 	
-	int execute(int lux, int target, int voltage);
+	float execute(int lux, int target, float voltage);
 	
 }
