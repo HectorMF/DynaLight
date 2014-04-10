@@ -110,7 +110,7 @@ public class Room {
 			temp += " P: " + String.format("%.2f", percentage);
 		}
 			
-		font.draw(batch, "L: " + lux + "\n" + temp, position.x + 5, position.y + 20);
+		font.draw(batch, "L: " + String.format("%04d", lux) + "\n" + temp, position.x + 5, position.y + 20);
 		for(LightFixture light : lights){
 			light.drawText(position, batch, font);
 		}

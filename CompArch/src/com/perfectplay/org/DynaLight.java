@@ -16,6 +16,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.perfectplay.org.algorithms.BasicAlgorithm;
 import com.perfectplay.org.lights.*;
 
@@ -30,6 +32,9 @@ public class DynaLight implements ApplicationListener {
 	private Sprite sprite;
 	TextureRegion region;
 	private BitmapFont font;
+	
+	private Skin skin;
+	private Stage stage;
 	
 	private double time;
 	
@@ -107,7 +112,7 @@ public class DynaLight implements ApplicationListener {
 		bedroom1.setSensor(new Sensor(new BasicAlgorithm(.1f)).setTargetLux(200));
 		
 		//add the lights
-		bedroom1.addLight(new DeskLamp().setPosition(8.5f, 2).setRadius(5));
+		bedroom1.addLight(new DeskLamp().setPosition(8.5f, 4f).setRadius(5));
 		bedroom1.addLight(new DeskLamp().setPosition(8.5f, 9).setRadius(6));
 		bedroom1.addLight(new CeilingLight().setPosition(5,5));
 		
@@ -120,7 +125,7 @@ public class DynaLight implements ApplicationListener {
 		
 		bedroom2.addLight(new StandingLamp().setPosition(1, 15).setRadius(7));
 		bedroom2.addLight(new CeilingLight().setPosition(5,8));
-		bedroom2.addLight(new DeskLamp().setPosition(8.5f, 2).setRadius(5));
+		bedroom2.addLight(new DeskLamp().setPosition(8.5f, 6.5f).setRadius(5));
 		
 		bedroom2.addWindow(new Window());
 		
@@ -175,7 +180,7 @@ public class DynaLight implements ApplicationListener {
 
 	@Override
 	public void render() {		
-		time += .0001;
+		time += .0002;
 
 		Sun.instance.ambientLumens = (int) (Math.abs(7995 * Math.sin(time)));
 		Sun.instance.directLumens = (int) (5 + Math.abs(5 + 99995 * Math.sin(time)));
