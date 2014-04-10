@@ -71,7 +71,40 @@ public class DynaLight implements ApplicationListener {
 		
 		bedroom1.addWindow(new Window());
 		
+		
 		hallway.addLight(new NonSensorCeilingLight().setPosition(3, 13));
+		
+		
+		bedroom2.addLight(new StandingLamp().setPosition(1, 15).setRadius(7));
+		bedroom2.addLight(new CeilingLight().setPosition(5,8));
+		bedroom2.addLight(new DeskLamp().setPosition(9, 1).setRadius(5));
+		
+		bedroom2.addWindow(new Window());
+		
+		
+		bedroom3.addLight(new CeilingLight().setPosition(8,4));
+		bedroom3.addLight(new StandingLamp().setPosition(15,1).setRadius(7));
+		
+		bedroom3.addWindow(new Window());
+		
+		
+		bedroom4.addLight(new CeilingLight().setPosition(5,6));
+		bedroom4.addLight(new DeskLamp().setPosition(9,11).setRadius(5));
+		
+		bedroom4.addWindow(new Window());
+		
+		
+		bedroom5.addLight(new CeilingLight().setPosition(5,4));
+		bedroom5.addLight(new CeilingLight().setPosition(15, 4));
+		bedroom5.addLight(new StandingLamp().setPosition(1,7).setRadius(7));
+		bedroom5.addLight(new DeskLamp().setPosition(19, 4).setRadius(5));
+		
+		bedroom5.addWindow(new Window());
+		bedroom5.addWindow(new Window());
+		
+		
+		bathroom1.addLight(new NonSensorCeilingLight().setPosition(5,3));
+		
 
 		rooms.add(hallway);
 		rooms.add(bedroom1);
