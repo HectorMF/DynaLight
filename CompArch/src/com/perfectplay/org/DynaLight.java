@@ -17,8 +17,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.perfectplay.org.algorithms.BasicAlgorithm;
-import com.perfectplay.org.lights.CeilingLight;
-import com.perfectplay.org.lights.DeskLamp;
+import com.perfectplay.org.lights.*;
 
 public class DynaLight implements ApplicationListener {
 	private OrthographicCamera camera;
@@ -72,7 +71,7 @@ public class DynaLight implements ApplicationListener {
 		
 		bedroom1.addWindow(new Window());
 		
-		hallway.addLight(new CeilingLight().setPosition(3, 13));
+		hallway.addLight(new NonSensorCeilingLight().setPosition(3, 13));
 
 		rooms.add(hallway);
 		rooms.add(bedroom1);
@@ -109,7 +108,10 @@ public class DynaLight implements ApplicationListener {
 		shapeRenderer.setProjectionMatrix(camera.combined);
 		shapeRenderer.begin(ShapeType.Line);
 		for(Room room : rooms)
+		{
 			room.draw(shapeRenderer);
+			room.calculateLux();
+		}
 		shapeRenderer.end();
 		
 		batch.setProjectionMatrix(camera.combined);
