@@ -101,5 +101,8 @@ public class Room {
 	
 	public void drawText(SpriteBatch batch, BitmapFont font){
 		font.draw(batch, "Lux: " + lux, position.x + 5, position.y + 20);
+		for(LightFixture light : lights){
+			light.drawText(position, batch, font);
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package com.perfectplay.org;
 
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
 
@@ -36,10 +38,12 @@ public abstract class LightFixture {
 	}
 	
 	public void draw(Vector2 pos, ShapeRenderer renderer){
-		System.out.println(pos.cpy().add(position));
 		renderer.circle(pos.cpy().add(position).x, pos.cpy().add(position).y, radius);
 	}
 	
+	public void drawText(Vector2 pos, SpriteBatch batch, BitmapFont font){
+		font.draw(batch, String.format("%04d", lumens), pos.cpy().add(position).x - 15, pos.cpy().add(position).y - radius - 3 );
+	}
 	
 	protected abstract int calculateLumens(float percentage);
 }
