@@ -69,7 +69,7 @@ public class DynaLight implements ApplicationListener {
 		bedroom1.setSensor(new Sensor(new BasicAlgorithm(.1f)).setTargetLux(200));
 		
 		//add the lights
-		bedroom1.addLight(new DeskLamp().setPosition(9,1).setRadius(5));
+		bedroom1.addLight(new DeskLamp().setPosition(9, 2).setRadius(5));
 		bedroom1.addLight(new DeskLamp().setPosition(9, 9).setRadius(6));
 		bedroom1.addLight(new CeilingLight().setPosition(5,5));
 		
@@ -81,7 +81,7 @@ public class DynaLight implements ApplicationListener {
 		
 		bedroom2.addLight(new StandingLamp().setPosition(1, 15).setRadius(7));
 		bedroom2.addLight(new CeilingLight().setPosition(5,8));
-		bedroom2.addLight(new DeskLamp().setPosition(9, 1).setRadius(5));
+		bedroom2.addLight(new DeskLamp().setPosition(9, 2).setRadius(5));
 		
 		bedroom2.addWindow(new Window());
 		
@@ -89,7 +89,7 @@ public class DynaLight implements ApplicationListener {
 		
 		
 		bedroom3.addLight(new CeilingLight().setPosition(8,4));
-		bedroom3.addLight(new StandingLamp().setPosition(15,1).setRadius(7));
+		bedroom3.addLight(new StandingLamp().setPosition(15,2).setRadius(7));
 		
 		bedroom3.addWindow(new Window());
 		
@@ -138,7 +138,8 @@ public class DynaLight implements ApplicationListener {
 	public void render() {		
 		time += .001;
 
-		Sun.instance.ambientLumens = (int) (5 + Math.abs(7995 * Math.sin(time)));
+		Sun.instance.ambientLumens = (int) (Math.abs(7995 * Math.sin(time)));
+		Sun.instance.directLumens = (int) (5 + Math.abs(5 + 99995 * Math.sin(time)));
 
 		
 		SensorController.instance.update();
