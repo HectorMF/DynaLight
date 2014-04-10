@@ -31,6 +31,8 @@ public class DynaLight implements ApplicationListener {
 	TextureRegion region;
 	private BitmapFont font;
 	
+	private double time;
+	
 	@Override
 	public void create() {		
 		float w = Gdx.graphics.getWidth();
@@ -50,6 +52,8 @@ public class DynaLight implements ApplicationListener {
 		region = new TextureRegion(texture, 0, 0, 300, 300);
 		int moveX = -5;
 		int moveY = -12;
+		
+		time = 0;
 		
 		Room hallway = new Room(6,26).setPosition(moveX + 10, moveY + 0);
 		Room bedroom1 = new Room(10,10).setPosition(moveX, moveY);
@@ -81,17 +85,23 @@ public class DynaLight implements ApplicationListener {
 		
 		bedroom2.addWindow(new Window());
 		
+		bedroom2.setSensor(new Sensor(new BasicAlgorithm(.1f)).setTargetLux(500));
+		
 		
 		bedroom3.addLight(new CeilingLight().setPosition(8,4));
 		bedroom3.addLight(new StandingLamp().setPosition(15,1).setRadius(7));
 		
 		bedroom3.addWindow(new Window());
 		
+		bedroom3.setSensor(new Sensor(new BasicAlgorithm(.1f)).setTargetLux(350));
+		
 		
 		bedroom4.addLight(new CeilingLight().setPosition(5,6));
 		bedroom4.addLight(new DeskLamp().setPosition(9,11).setRadius(5));
 		
 		bedroom4.addWindow(new Window());
+		
+		bedroom4.setSensor(new Sensor(new BasicAlgorithm(.1f)).setTargetLux(450));
 		
 		
 		bedroom5.addLight(new CeilingLight().setPosition(5,4));
@@ -101,6 +111,8 @@ public class DynaLight implements ApplicationListener {
 		
 		bedroom5.addWindow(new Window());
 		bedroom5.addWindow(new Window());
+		
+		bedroom5.setSensor(new Sensor(new BasicAlgorithm(.1f)).setTargetLux(1000));
 		
 		
 		bathroom1.addLight(new NonSensorCeilingLight().setPosition(5,3));
@@ -124,12 +136,10 @@ public class DynaLight implements ApplicationListener {
 
 	@Override
 	public void render() {		
-		Sun.instance.ambientLumens += 10;
-		
-		if(Sun.instance.ambientLumens > 8000){
-			Sun.instance.ambientLumens = 0;
-		}
-		
+		time += .001;
+
+		Sun.instance.ambientLumens = (int) (5 + Math.abs(7995 * Math.sin(time)));
+
 		
 		SensorController.instance.update();
 	//	Gdx.gl.glClearColor(.52f, .807f, .95f, 1);
