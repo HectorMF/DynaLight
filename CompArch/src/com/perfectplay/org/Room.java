@@ -94,7 +94,8 @@ public class Room {
 		}
 		
 		for(Door door : doors){
-			
+			renderer.setColor(Color.WHITE);
+			door.draw(position, renderer);
 		}
 		
 	}
