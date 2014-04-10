@@ -49,15 +49,16 @@ public class DynaLight implements ApplicationListener {
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
 		region = new TextureRegion(texture, 0, 0, 300, 300);
-
+		int moveX = -5;
+		int moveY = -12;
 		
-		Room hallway = new Room(5,25).setPosition(10, 0);
-		Room bedroom1 = new Room(10,10);
-		Room bedroom2 = new Room (10,15).setPosition(0, 10);
-		Room bedroom3 = new Room (15,8).setPosition(0, -8);
-		Room bedroom4 = new Room (10,12).setPosition(15, -8);
-		Room bedroom5 = new Room (20,8).setPosition(0, 25);
-		Room bathroom1 = new Room(10,5).setPosition(15, 4);
+		Room hallway = new Room(5,25).setPosition(moveX + 10, moveY + 0);
+		Room bedroom1 = new Room(10,10).setPosition(moveX, moveY);
+		Room bedroom2 = new Room (10,15).setPosition(moveX +0,  moveY +10);
+		Room bedroom3 = new Room (15,8).setPosition(moveX +0,  -8 + moveY);
+		Room bedroom4 = new Room (10,12).setPosition(moveX +15,  -8 + moveY );
+		Room bedroom5 = new Room (20,8).setPosition(moveX +0,  moveY +25);
+		Room bathroom1 = new Room(10,5).setPosition(moveX +15,  moveY +4);
 		Door bedroomDoor = new Door();
 		
 		bedroom1.addDoor(bedroomDoor);
