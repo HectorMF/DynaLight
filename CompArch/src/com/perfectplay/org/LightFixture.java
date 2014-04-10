@@ -21,7 +21,7 @@ public abstract class LightFixture {
 		this.percentage = percentage;
 	}
 	
-	public LightFixture setPosition(int x, int y){
+	public LightFixture setPosition(float x, float y){
 		this.position.set(x*20,y*20);
 		return this;
 	}
@@ -43,7 +43,7 @@ public abstract class LightFixture {
 	}
 	
 	public void drawText(Vector2 pos, SpriteBatch batch, BitmapFont font){
-		font.draw(batch, String.format("%04d", lumens), pos.cpy().add(position).x - 15, pos.cpy().add(position).y - radius - 3 );
+		font.draw(batch, String.format("%04d", lumens), pos.cpy().add(position).x - 18, pos.cpy().add(position).y - radius - 3 );
 	}
 	
 	protected abstract int calculateLumens(float percentage);

@@ -5,16 +5,18 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Door {
 	//light transferred between rooms
-	public static float transfer = .2f;
+	public static float transfer = .1f;
 	
 	private Room room1;
 	private Room room2;
 	private boolean isClosed;
 	private boolean isHorizontal;
-	private Vector2 position;
+	private Vector2 position1;
+	private Vector2 position2;
 	
 	public Door(){
-		this.position = new Vector2();
+		this.position1 = new Vector2();
+		this.position2 = new Vector2();
 	}
 		
 	void addRoom(Room room){
@@ -38,8 +40,13 @@ public class Door {
 		return 0;
 	}
 	
-	public Door setPosition(int x, int y){
-		position.set(x*20,y*20);
+	public Door setPosition1(int x, int y){
+		position1.set(x,y);
+		return this;
+	}
+	
+	public Door setPosition2(int x, int y){
+		position2.set(x,y);
 		return this;
 	}
 	
@@ -48,13 +55,16 @@ public class Door {
 		return this;
 	}
 	
-	public void draw(Vector2 pos, ShapeRenderer renderer){
+	public void draw(Vector2 pos, ShapeRenderer renderer, Room room){
+		Vector2 temp = position2;
+		if(room == room1)
+			temp = position1;
 		if(isHorizontal){
-			renderer.line(pos.cpy().add(position).x, pos.cpy().add(position).y, pos.cpy().add(position).x + 40, pos.cpy().add(position).y);
-			renderer.line(pos.cpy().add(position).x, pos.cpy().add(position).y-1, pos.cpy().add(position).x + 40, pos.cpy().add(position).y-1);
+			renderer.line(pos.cpy().add(temp).x, pos.cpy().add(temp).y, pos.cpy().add(temp).x + 40, pos.cpy().add(temp).y);
+			renderer.line(pos.cpy().add(temp).x, pos.cpy().add(temp).y+1, pos.cpy().add(temp).x + 40, pos.cpy().add(temp).y+1);
 		}else{
-			renderer.line(pos.cpy().add(position).x+1, pos.cpy().add(position).y, pos.cpy().add(position).x+1, pos.cpy().add(position).y + 40);
-			renderer.line(pos.cpy().add(position).x, pos.cpy().add(position).y, pos.cpy().add(position).x, pos.cpy().add(position).y + 40);
+			renderer.line(pos.cpy().add(temp).x+1, pos.cpy().add(temp).y, pos.cpy().add(temp).x+1, pos.cpy().add(temp).y + 40);
+			renderer.line(pos.cpy().add(temp).x, pos.cpy().add(temp).y, pos.cpy().add(temp).x, pos.cpy().add(temp).y + 40);
 		}
 	}
 	

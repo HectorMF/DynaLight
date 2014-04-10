@@ -44,7 +44,7 @@ public class DynaLight implements ApplicationListener {
 		//camera.
 		camera.update();
 		batch = new SpriteBatch();
-		font = new BitmapFont();
+		font = new BitmapFont(Gdx.files.internal("data/arial.fnt"));
 		
 		texture = new Texture(Gdx.files.internal("sun.png"));
 		texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
@@ -63,14 +63,52 @@ public class DynaLight implements ApplicationListener {
 		Room bedroom5 = new Room (20,8).setPosition(moveX +0,  moveY +26);
 		Room bathroom1 = new Room(10,6).setPosition(moveX +16,  moveY +4);
 		Door bedroomDoor = new Door();
+		Door bedroomDoor2 = new Door().setHorizontal();
+		Door bedroomDoor3 = new Door();
+		Door bedroomDoor4 = new Door();
+		Door bedroomDoor5 = new Door().setHorizontal();
+		Door bathroomDoor = new Door();
 		
 		bedroom1.addDoor(bedroomDoor);
+		bedroomDoor.setPosition1(199,10);
+		bedroomDoor.setPosition2(0,10);
+		
+		bedroomDoor2.setPosition1(60,0);
+		bedroomDoor2.setPosition2(260,159);
+		
+		bedroomDoor3.setPosition1(0,170);
+		bedroomDoor3.setPosition2(119,10);
+		
+		bedroomDoor4.setPosition1(0,260);
+		bedroomDoor4.setPosition2(199,60);
+		
+		bedroomDoor5.setPosition1(10,519);
+		bedroomDoor5.setPosition2(210,00);
+		
+		bathroomDoor.setPosition1(119,90);
+		bathroomDoor.setPosition2(0,10);
+		
+		
+		hallway.addDoor(bedroomDoor2);
+		bedroom3.addDoor(bedroomDoor2);
+
+		hallway.addDoor(bedroomDoor4);
+		bedroom2.addDoor(bedroomDoor4);
+		
+		bedroom4.addDoor(bedroomDoor3);
+		hallway.addDoor(bedroomDoor3);
+		
+		hallway.addDoor(bedroomDoor5);
+		bedroom5.addDoor(bedroomDoor5);
+		
+		hallway.addDoor(bathroomDoor);
+		bathroom1.addDoor(bathroomDoor);
 		
 		bedroom1.setSensor(new Sensor(new BasicAlgorithm(.1f)).setTargetLux(200));
 		
 		//add the lights
-		bedroom1.addLight(new DeskLamp().setPosition(9, 2).setRadius(5));
-		bedroom1.addLight(new DeskLamp().setPosition(9, 9).setRadius(6));
+		bedroom1.addLight(new DeskLamp().setPosition(8.5f, 2).setRadius(5));
+		bedroom1.addLight(new DeskLamp().setPosition(8.5f, 9).setRadius(6));
 		bedroom1.addLight(new CeilingLight().setPosition(5,5));
 		
 		bedroom1.addWindow(new Window());
@@ -82,7 +120,7 @@ public class DynaLight implements ApplicationListener {
 		
 		bedroom2.addLight(new StandingLamp().setPosition(1, 15).setRadius(7));
 		bedroom2.addLight(new CeilingLight().setPosition(5,8));
-		bedroom2.addLight(new DeskLamp().setPosition(9, 2).setRadius(5));
+		bedroom2.addLight(new DeskLamp().setPosition(8.5f, 2).setRadius(5));
 		
 		bedroom2.addWindow(new Window());
 		
@@ -98,7 +136,7 @@ public class DynaLight implements ApplicationListener {
 		
 		
 		bedroom4.addLight(new CeilingLight().setPosition(5,6));
-		bedroom4.addLight(new DeskLamp().setPosition(9,11).setRadius(5));
+		bedroom4.addLight(new DeskLamp().setPosition(8.5f,11).setRadius(5));
 		
 		bedroom4.addWindow(new Window());
 		
@@ -108,7 +146,7 @@ public class DynaLight implements ApplicationListener {
 		bedroom5.addLight(new CeilingLight().setPosition(5,4));
 		bedroom5.addLight(new CeilingLight().setPosition(15, 4));
 		bedroom5.addLight(new StandingLamp().setPosition(1,7).setRadius(7));
-		bedroom5.addLight(new DeskLamp().setPosition(19, 4).setRadius(5));
+		bedroom5.addLight(new DeskLamp().setPosition(18.5f, 4).setRadius(5));
 		
 		bedroom5.addWindow(new Window());
 		bedroom5.addWindow(new Window());
@@ -137,7 +175,7 @@ public class DynaLight implements ApplicationListener {
 
 	@Override
 	public void render() {		
-		time += .001;
+		time += .0001;
 
 		Sun.instance.ambientLumens = (int) (Math.abs(7995 * Math.sin(time)));
 		Sun.instance.directLumens = (int) (5 + Math.abs(5 + 99995 * Math.sin(time)));

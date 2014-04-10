@@ -5,7 +5,7 @@ public class Sensor {
 	private Room room;
 	
 	private float voltage = 120;	
-	private int target = 00;
+	public int target = 00;
 	
 	public Sensor(ISensorAlgorithm lightAlgorithm){
 		this.lightAlgorithm = lightAlgorithm;

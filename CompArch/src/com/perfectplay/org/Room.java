@@ -19,6 +19,8 @@ public class Room {
 	
 	private int lux;
 	
+	private float percentage;
+	
 	public Room(int width, int length){
 		this.position = new Vector2();
 		this.dimensions = new Vector2(width,length);
@@ -75,6 +77,7 @@ public class Room {
 	}
 	
 	void dim(float percentage){
+		this.percentage = percentage;
 		for(LightFixture light : lights){
 			light.dim(percentage);
 		}
@@ -95,13 +98,19 @@ public class Room {
 		
 		for(Door door : doors){
 			renderer.setColor(Color.WHITE);
-			door.draw(position, renderer);
+			door.draw(position, renderer, this);
 		}
 		
 	}
 	
 	public void drawText(SpriteBatch batch, BitmapFont font){
-		font.draw(batch, "Lux: " + lux, position.x + 5, position.y + 20);
+		String temp = "";
+		if(sensor != null){
+			temp += " T: " + sensor.target;
+			temp += " P: " + String.format("%.2f", percentage);
+		}
+			
+		font.draw(batch, "L: " + lux + "\n" + temp, position.x + 5, position.y + 20);
 		for(LightFixture light : lights){
 			light.drawText(position, batch, font);
 		}
