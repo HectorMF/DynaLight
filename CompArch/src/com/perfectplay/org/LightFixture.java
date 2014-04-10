@@ -38,7 +38,8 @@ public abstract class LightFixture {
 	}
 	
 	public void draw(Vector2 pos, ShapeRenderer renderer){
-		renderer.circle(pos.cpy().add(position).x, pos.cpy().add(position).y, radius);
+		renderer.circle(pos.cpy().add(position).x, pos.cpy().add(position).y, radius,24);
+		renderer.circle(pos.cpy().add(position).x, pos.cpy().add(position).y, radius-1,24);
 	}
 	
 	public void drawText(Vector2 pos, SpriteBatch batch, BitmapFont font){
